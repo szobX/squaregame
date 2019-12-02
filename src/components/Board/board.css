@@ -3,5 +3,18 @@
 	height: auto;
 	display: flex;
 	flex-wrap: wrap;
-	border: 1px solid #000;
+	/* border: 1px solid #000; */
+	/* filter: grayscale(0.8); */
+}
+
+@media (max-width: 500px) {
+	.board {
+		width: 400px;
+	}
+}
+
+@media (max-width: 300px) {
+	.board {
+		width: 200px;
+	}
 }

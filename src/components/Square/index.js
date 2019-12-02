@@ -2,9 +2,14 @@ import React from 'react';
 
 import './square.css';
 
-const Square = ({ x, y, id, color, handleClick }) => {
+const Square = ({ x, y, id, color, handleClick, disable }) => {
+	console.log(!disable);
 	return (
-		<div className="square" onClick={() => handleClick(x, y, id, color)} style={{ background: color }}>
+		<div
+			className="square"
+			onClick={disable === true ? () => handleClick(x, y, id, color) : null}
+			style={{ background: color }}
+		>
 			{/* {x}/{y} */}
 		</div>
 	);

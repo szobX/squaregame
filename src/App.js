@@ -8,20 +8,30 @@ class App extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			isStart: false,
 			squares: []
 		};
 	}
-
+	const;
 	componentDidMount() {
 		const render = renderSquare();
-		this.setState({ squares: render });
+		this.setState({ squares: render, isStart: false });
 	}
-
+	newGame() {
+		const render = renderSquare();
+		this.setState({
+			squares: render,
+			isStart: !this.state.isStart
+		});
+	}
 	render() {
+		const { isStart, squares } = this.state;
 		return (
 			<div className="App">
-				{/* {this.state.squares.length} */}
-				<Board squares={this.state.squares} />
+				<button className="btn" onClick={() => this.newGame()}>
+					{this.state.isStart ? ' RESET GAME' : 'START GAME'}
+				</button>
+				<Board squares={squares} isStart={isStart} />
 			</div>
 		);
 	}

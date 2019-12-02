@@ -8,3 +8,17 @@
 	font-size: calc(10px + 2vmin);
 	color: #000;
 }
+
+.btn {
+	border: 1px solid #333;
+	background: none;
+	padding: 15px 55px;
+	margin: 40px;
+	border-radius: 5px;
+	font-weight: bold;
+	font-size: 17px;
+}
+.btn:hover {
+	background: #333;
+	color: #fff;
+}

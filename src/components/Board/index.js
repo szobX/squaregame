@@ -2,38 +2,53 @@ import React, { useState, useEffect } from 'react';
 import Square from '../Square';
 import { randomColor } from '../renderSquare';
 import './board.css';
-const Board = ({ squares }) => {
-	// const [ square, setSquare ] = useState();
-
+const Board = ({ squares, isStart }) => {
+	const [ click, setClick ] = useState(false);
 	const [ points, setPoints ] = useState(0);
 	const matchedNumber = [];
 	const moves = [ [ -1, 0 ], [ 0, 1 ], [ 1, 0 ], [ 0, -1 ] ];
+	const [ endGame, setEndGame ] = useState(false);
 
 	const handleClick = (x, y, id, color) => {
-		matchedNumber.slice(0, matchedNumber.length);
-		searchMatch(x, y, id, color);
-		console.log(matchedNumber);
-		if (matchedNumber.length === 1) return;
-		const findedElements = squares.filter(square => matchedNumber.includes(square.id));
-		console.log('usuniete klocki', findedElements);
-		setPoints(prev => prev + matchedNumber.length);
-		// setSquare(findedElements);
+		if (!click || isStart === false) {
+			setClick(true);
+			matchedNumber.length = 0;
+			searchMatch(x, y, id, color);
+			if (matchedNumber.length === 1) {
+				setClick(false);
+				return;
+			}
+			const findedElements = squares.filter(square => matchedNumber.includes(square.id));
+			setPoints(prev => prev + matchedNumber.length);
+			movesInArray(findedElements);
 
-		movesInArray(findedElements);
+			//check end game
+			let soloElement = 0;
+			squares.forEach(square => {
+				if (soloElement === 0) {
+					moves.forEach(move => {
+						const element = cElement(square.x, square.y, move[0], move[1]);
+						if (element === undefined) return;
+						if (element.color === square.color) soloElement++;
+					});
+				} else {
+					return;
+				}
+			});
+			if (soloElement === 0) {
+				console.log(soloElement);
+				setEndGame(true);
+			}
+			setClick(false);
+		}
 	};
-	// const swap = (element, index) => {
-	// 	if (element[index + 1] === undefined) return false;
-
-	// 	if (element[index + 1].color === 'white') {
-	// 		const temp = element[index].color;
-	// 		element[index + 1].color = element[index].color;
-	// 		element[index].color = 'white';
-	// 	}
-	// 	if (element[index].color === 'white') return true;
-	// 	else {
-	// 		if (swap(element[index + 1], index + 1) === false) return;
-	// 	}
-	// };
+	useEffect(
+		() => {
+			setPoints(0);
+			console.log(isStart);
+		},
+		[ isStart, squares ]
+	);
 	const movesInArray = findedElements => {
 		console.log(squares);
 		findedElements.forEach(x => {
@@ -80,53 +95,30 @@ const Board = ({ squares }) => {
 		matchedNumber.push(id);
 		moves.forEach(move => {
 			const currentElement = cElement(x, y, move[0], move[1]);
-			// console.log('akt element', currentElement);
-			// console.log('color:', currentColor);
-			if (currentElement === undefined) {
-				// console.log('undefined');
-				return;
-			}
-			if (currentElement.x < 1 || currentElement.y < 1) {
-				// console.log('sciana');
-				return;
-			}
-			if (matchedNumber.includes(currentElement.id)) {
-				// console.log('juz dodany');
-				return;
-			}
-			if (currentElement.color !== color) {
-				// console.log('sciana kolor');
-				return false;
-			} else {
+			if (currentElement === undefined) return;
+
+			if (currentElement.x < 1 || currentElement.y < 1) return;
+
+			if (matchedNumber.includes(currentElement.id)) return;
+
+			if (currentElement.color !== color) return;
+			else {
 				searchMatch(currentElement.x, currentElement.y, currentElement.id, color);
-				// console.log('moge isc dalej');
-				return true;
+				return;
 			}
 		});
-		return true;
 	};
 
 	return (
 		<div>
-			points:{points}
-			<div className="board">
+			{endGame === true ? 'TAK' : 'NIE'}
+			{isStart ? <div> points:{points}</div> : ''}
+			<div className="board" style={isStart ? {} : { filter: 'grayscale(100%)' }}>
 				{squares.map(({ x, y, id, color }) => (
-					<Square x={x} y={y} id={id} color={color} handleClick={handleClick} />
+					<Square x={x} y={y} id={id} color={color} handleClick={handleClick} disable={isStart} />
 				))}
 			</div>
 		</div>
 	);
 };
 export default Board;
-
-// TODO::  wyjąć wszystkie kolory   to tablicy
-// TODO:: ZAMIENIĆ ICH KOLEJNOSCI I DOPISAC ZNÓW DO OBIEKTÓW
-
-// const tab = [
-// 	{ x: 1, y: 3, id: '13', color: '#FFFFFF' },
-// 	{ x: 2, y: 3, id: '23', color: '#36EEEE' },
-// 	{ x: 3, y: 3, id: '33', color: '#6F2168' },
-// 	{ x: 4, y: 3, id: '43', color: '#6F2168' },
-// 	{ x: 5, y: 3, id: '53', color: '#6F2168' },
-// 	{ x: 6, y: 3, id: '63', color: '#6693DD' },
-// ];
