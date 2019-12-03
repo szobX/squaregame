@@ -1,20 +1,30 @@
 .board {
-	width: 600px;
+	width: 300px;
 	height: auto;
 	display: flex;
 	flex-wrap: wrap;
 	/* border: 1px solid #000; */
 	/* filter: grayscale(0.8); */
 }
-
-@media (max-width: 500px) {
+@media (min-width: 500px) {
 	.board {
-		width: 400px;
+		width: 350px;
 	}
 }
 
-@media (max-width: 300px) {
+@media (min-width: 1000px) {
 	.board {
-		width: 200px;
+		width: 650px;
 	}
 }
+/* @media (min-width: 500px) {
+	.board {
+		width: 160px;
+	}
+}
+
+@media (max-width: 999px) {
+	.board {
+		width: 280px;
+	}
+} */

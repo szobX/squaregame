@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Square from '../Square';
 import { randomColor } from '../renderSquare';
 import './board.css';
-const Board = ({ squares, isStart }) => {
+const Board = ({ squares, isStart, endGameFunc }) => {
 	const [ click, setClick ] = useState(false);
 	const [ points, setPoints ] = useState(0);
 	const matchedNumber = [];
@@ -36,7 +36,6 @@ const Board = ({ squares, isStart }) => {
 				}
 			});
 			if (soloElement === 0) {
-				console.log(soloElement);
 				setEndGame(true);
 			}
 			setClick(false);
@@ -45,16 +44,13 @@ const Board = ({ squares, isStart }) => {
 	useEffect(
 		() => {
 			setPoints(0);
-			console.log(isStart);
 		},
 		[ isStart, squares ]
 	);
 	const movesInArray = findedElements => {
-		console.log(squares);
 		findedElements.forEach(x => {
 			x.color = '#FFFFFF';
 			const row = squares.filter(sq => sq.y === x.y);
-			// console.log(row);
 
 			const nonWhiteColors = row.map(({ color }) => color).filter(color => color !== '#FFFFFF');
 			const newData = [
@@ -73,15 +69,8 @@ const Board = ({ squares, isStart }) => {
 					e.color = newData[i].color;
 				}
 			});
-			// row = newData;
-
 			row.forEach((e, index) => {});
-			console.log('----');
-
-			// console.log(row);
 		});
-
-		console.log(squares);
 	};
 
 	const cElement = (x, y, moveX, moveY) => {
@@ -111,7 +100,7 @@ const Board = ({ squares, isStart }) => {
 
 	return (
 		<div>
-			{endGame === true ? 'TAK' : 'NIE'}
+			{endGame === true ? endGameFunc : ''}
 			{isStart ? <div> points:{points}</div> : ''}
 			<div className="board" style={isStart ? {} : { filter: 'grayscale(100%)' }}>
 				{squares.map(({ x, y, id, color }) => (
