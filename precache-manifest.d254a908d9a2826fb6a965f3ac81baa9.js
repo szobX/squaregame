@@ -1,19 +1,19 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "3d23bd9c9b5867d7aa3122e4a4d9aa8a",
+    "revision": "4370c6ae63dac1b21517f5a40377cf7b",
     "url": "/squaregame/index.html"
   },
   {
-    "revision": "836dfd2a2b31b8be3b17",
-    "url": "/squaregame/static/css/main.5e893738.chunk.css"
+    "revision": "43e6c4b6283edcad41d0",
+    "url": "/squaregame/static/css/main.92f13668.chunk.css"
   },
   {
     "revision": "c4c65fb8733389f5d0ed",
     "url": "/squaregame/static/js/2.f090b940.chunk.js"
   },
   {
-    "revision": "836dfd2a2b31b8be3b17",
-    "url": "/squaregame/static/js/main.9e79882c.chunk.js"
+    "revision": "43e6c4b6283edcad41d0",
+    "url": "/squaregame/static/js/main.4d36b9a9.chunk.js"
   },
   {
     "revision": "c65cff1d620ff047559a",
