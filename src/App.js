@@ -16,9 +16,9 @@ class App extends React.Component {
 	}
 	const;
 	componentDidMount() {
+		
 		const width = window.innerWidth;
-		console.log(width);
-		console.log(width);
+		// setup  board size
 		if (width < 500) {
 			this.setState({
 				y: 5,
@@ -36,7 +36,7 @@ class App extends React.Component {
 				x: 7
 			});
 		}
-
+			// rendering board
 		const render = renderSquare(this.state.x, this.state.y);
 		this.setState({ squares: render, isStart: false });
 	}

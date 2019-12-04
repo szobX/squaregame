@@ -3,8 +3,6 @@
 	height: auto;
 	display: flex;
 	flex-wrap: wrap;
-	/* border: 1px solid #000; */
-	/* filter: grayscale(0.8); */
 }
 @media (min-width: 500px) {
 	.board {
@@ -17,14 +15,3 @@
 		width: 650px;
 	}
 }
-/* @media (min-width: 500px) {
-	.board {
-		width: 160px;
-	}
-}
-
-@media (max-width: 999px) {
-	.board {
-		width: 280px;
-	}
-} */

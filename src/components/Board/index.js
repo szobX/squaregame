@@ -9,16 +9,22 @@ const Board = ({ squares, isStart, endGameFunc }) => {
 	const moves = [ [ -1, 0 ], [ 0, 1 ], [ 1, 0 ], [ 0, -1 ] ];
 	const [ endGame, setEndGame ] = useState(false);
 
+	// function after clicked on square
 	const handleClick = (x, y, id, color) => {
 		if (!click || isStart === false) {
+			//disable click during function
 			setClick(true);
 			matchedNumber.length = 0;
+
 			searchMatch(x, y, id, color);
+
+			// square without neighbour  is useless
 			if (matchedNumber.length === 1) {
 				setClick(false);
 				return;
 			}
 			const findedElements = squares.filter(square => matchedNumber.includes(square.id));
+
 			setPoints(prev => prev + matchedNumber.length);
 			movesInArray(findedElements);
 
@@ -72,7 +78,7 @@ const Board = ({ squares, isStart, endGameFunc }) => {
 			row.forEach((e, index) => {});
 		});
 	};
-
+	// find  single element from squares
 	const cElement = (x, y, moveX, moveY) => {
 		const newX = x + moveX;
 		const newY = y + moveY;
